@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosistema Digital: La Huella Digital y la Privacidad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root{--navy:#0f1b2d;--navy-2:#172a45;--teal:#1fb89a;--teal-dark:#0f8a73;--amber:#f5b942;--bg:#f2f5f9;--ink:#1c2738;--muted:#5d6b80;--line:#dde4ee;--soft:#e8f6f2}
+        *{box-sizing:border-box}
+        html{scroll-behavior:smooth;scroll-padding-top:90px}
+        body{font-family:'DM Sans','Segoe UI',sans-serif;line-height:1.65;color:var(--ink);background:var(--bg);margin:0}
+        h1,h2,h3,.brand,li strong{font-family:'Sora',sans-serif}
+
+        /* menú */
+        .nav{position:sticky;top:0;z-index:100;background:rgba(15,27,45,.94);backdrop-filter:blur(8px)}
+        .nav-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+        .brand{font-weight:800;color:#fff;text-decoration:none;display:flex;align-items:center;gap:.6rem}
+        .brand::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(31,184,154,.25)}
+        .nav ul{list-style:none;display:flex;gap:.3rem;margin:0;padding:0;overflow-x:auto}
+        .nav ul a{display:block;padding:.5rem 1rem;border-radius:999px;color:#b9c6d9;text-decoration:none;font-weight:500;white-space:nowrap}
+        .nav ul a:hover{color:#fff;background:rgba(255,255,255,.08)}
+        .nav ul a.active{color:var(--navy);background:var(--teal);font-weight:700}
+
+        /* encabezado */
+        header{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;padding:6rem 1.5rem 8rem}
+        header::before{content:"";position:absolute;right:-120px;top:50%;width:560px;height:640px;transform:translateY(-50%) rotate(-12deg);background:repeating-radial-gradient(ellipse at 45% 60%,transparent 0 9px,rgba(31,184,154,.35) 9px 11px);-webkit-mask-image:radial-gradient(ellipse,#000 35%,transparent 72%);mask-image:radial-gradient(ellipse,#000 35%,transparent 72%)}
+        .hero-inner{position:relative;max-width:1100px;margin:0 auto}
+        h1{font-weight:800;font-size:clamp(2.1rem,5.5vw,3.8rem);line-height:1.12;letter-spacing:-.025em;max-width:720px;margin:0 0 1.4rem}
+        header p{display:inline-block;margin:0;padding:.45rem 1.1rem;font-weight:500;color:var(--navy);background:var(--amber);border-radius:8px}
+
+        /* secciones */
+        .container{max-width:1100px;margin:-4rem auto 2rem;padding:0 1.5rem;position:relative}
+        section{background:#fff;padding:2.4rem;margin-bottom:2rem;border-radius:18px;border:1px solid var(--line);box-shadow:0 12px 32px rgba(15,27,45,.07)}
+        h2{font-weight:700;font-size:1.55rem;line-height:1.3;color:var(--navy);margin:0 0 1.6rem;padding-bottom:1rem;border-bottom:3px solid var(--soft);background:linear-gradient(var(--teal),var(--teal)) left bottom/80px 3px no-repeat border-box}
+        h3{font-weight:700;font-size:1.05rem;color:var(--teal-dark);margin:0 0 .4rem}
+        section>p{color:var(--muted);margin-top:0}
+
+        /* listas como tarjetas */
+        section ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1rem}
+        section li{background:var(--bg);border-radius:12px;padding:1.2rem 1.4rem;border-left:5px solid var(--teal)}
+        li strong{display:block;font-size:.95rem;color:var(--navy);margin-bottom:.3rem}
+        li em{color:var(--navy);font-style:normal;font-weight:500}
+
+        /* video, audio e imágenes */
+        .media-grid{display:grid;gap:1.5rem;margin-top:1.5rem}
+        @media(min-width:768px){.media-grid{grid-template-columns:1fr 1fr}.full-width{grid-column:span 2}}
+        .media-card{border:1px solid var(--line);border-radius:14px;padding:1.5rem;background:var(--bg)}
+        .media-card p{color:var(--muted);margin:0}
+        .media-element{display:block;width:100%;margin-top:1rem;border-radius:12px}
+        .evidencia{max-width:560px;margin:1rem auto 0;border:1px solid var(--line)}
+
+        /* tabla */
+        #seo{overflow-x:auto}
+        table{width:100%;min-width:640px;border-collapse:separate;border-spacing:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+        th,td{text-align:left;padding:15px 18px;vertical-align:top;border-bottom:1px solid var(--line)}
+        th{background:var(--navy);color:#fff;font-family:'Sora',sans-serif;font-size:.9rem}
+        td:first-child{background:var(--soft);color:var(--navy);width:18%}
+        tr:last-child td{border-bottom:none}
+
+        /* pie y celular */
+        footer{text-align:center;padding:2.2rem 1.5rem;background:var(--navy);color:#b9c6d9;margin-top:3rem;border-top:4px solid var(--teal)}
+        footer p{margin:0}
+        @media(max-width:700px){.brand{display:none}.nav-inner{padding:0 .8rem}header{padding:4rem 1.2rem 6.5rem}section{padding:1.5rem}}
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a class="brand" href="#inicio">Huella Digital</a>
+            <ul>
+                <li><a href="#ficha">Ficha</a></li>
+                <li><a href="#contenidos">Contenidos</a></li>
+                <li><a href="#plataformas">Plataformas</a></li>
+                <li><a href="#seo">SEO</a></li>
+                <li><a href="#difusion">Difusión</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="inicio">
+        <div class="hero-inner">
+            <h1>Ecosistema Digital: La Huella Digital y la Privacidad</h1>
+            <p>Proyecto Integrador de Contenidos Digitales</p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <!-- PASO 1: FICHA DEL PROYECTO -->
+        <section id="ficha">
+            <h2>1. Ficha del Proyecto</h2>
+            <ul>
+                <li><strong>Tema central:</strong> La huella digital y la gestión de la privacidad en redes sociales.</li>
+                <li><strong>Público objetivo:</strong> Jóvenes y estudiantes de 15 a 25 años que utilizan redes sociales diariamente.</li>
+                <li><strong>Mensaje principal:</strong> Todo lo que compartes en internet deja una marca permanente; aprender a configurar tu privacidad protege tu futuro académico y profesional.</li>
+                <li><strong>Propósito del producto:</strong> Educar y sensibilizar sobre la seguridad digital de forma práctica y accesible.</li>
+            </ul>
+        </section>
+
+        <!-- PASO 2 Y 3: ECOSISTEMA DE CONTENIDOS -->
+        <section id="contenidos">
+            <h2>2. Ecosistema de Contenidos</h2>
+            <p>Las tres piezas de este ecosistema comparten identidad visual y conceptual, complementándose entre sí.</p>
+            
+            <div class="media-grid">
+                <!-- PIEZA 1: VIDEO -->
+                <div class="media-card full-width">
+                    <h3>Pieza Principal: Video Explicativo (1 a 3 min)</h3>
+                    <p>Desarrolla el concepto central de la huella digital y ofrece 3 consejos clave de seguridad.</p>
+                    <video class="media-element" controls preload="metadata">
+                        <source src="videoproyecto.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de video.
+                    </video>
+                </div>
+
+                <!-- PIEZA 2: INFOGRAFÍA -->
+                <div class="media-card">
+                    <h3>Pieza Sintética: Infografía (1 Página)</h3>
+                    <p>Sintetiza los 4 pasos clave para blindar la identidad digital.</p>
+                    <img class="media-element" src="infografia.png" alt="Infografía con los 4 pasos para cuidar tu huella digital: busca tu nombre en Google, configura tu privacidad, piensa antes de publicar y protege tus accesos">
+                </div>
+
+                <!-- PIEZA 3: AUDIO / PODCAST -->
+                <div class="media-card">
+                    <h3>Pieza Complementaria: Podcast (2 a 4 min)</h3>
+                    <p>Profundiza en casos reales de consecuencias de la huella digital e invita a explorar el sitio.</p>
+                    <audio class="media-element" controls preload="metadata">
+                        <source src="audioproyecto.mp3" type="audio/mpeg">
+                        Tu navegador no soporta la reproducción de audio.
+                    </audio>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASO 4: JUSTIFICACIÓN DE PLATAFORMAS -->
+        <section id="plataformas">
+            <h2>3. Justificación de Plataformas</h2>
+            <ul>
+                <li><strong>Plataforma Principal (Sitio Web):</strong> Se seleccionó un sitio web independiente para reunir, integrar e incrustar las tres piezas en un solo espacio accesible, limpio y estructurado.</li>
+                <li><strong>Canal Complementario (Instagram):</strong> Se eligió Instagram (Reels y Stories) como canal de difusión debido a la alta concentración de nuestro público objetivo (15 a 25 años), facilitando el tráfico mediante enlaces directos.</li>
+            </ul>
+        </section>
+
+        <!-- PASO 5: TABLA DE OPTIMIZACIÓN SEO Y ACCESIBILIDAD -->
+        <section id="seo">
+            <h2>4. Optimización para Visibilidad Digital (SEO y Accesibilidad)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Elemento</th>
+                        <th>Aplicación en las piezas</th>
+                        <th>Justificación / Propósito</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Título SEO</strong></td>
+                        <td>Guía rápida: Cómo cuidar tu huella digital en 2026</td>
+                        <td>Incluye términos de alta búsqueda y capta la atención de la audiencia.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Palabras clave</strong></td>
+                        <td>huella digital, privacidad en redes, seguridad online, identidad digital</td>
+                        <td>Facilita la indexación y posicionamiento en buscadores.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Descripción</strong></td>
+                        <td>Aprende a proteger tu información y gestionar lo que internet sabe de ti con esta guía integradora.</td>
+                        <td>Ofrece una síntesis clara del valor del contenido para mejorar el CTR.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hashtags</strong></td>
+                        <td>#EducacionDigital #HuellaDigital #SeguridadOnline #TipsDePrivacidad</td>
+                        <td>Maximiza el alcance orgánico en redes sociales.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Llamado a la Acción (CTA)</strong></td>
+                        <td>¡Haz clic en el enlace del perfil para ver la infografía completa!</td>
+                        <td>Incentiva la navegación e interacción entre las piezas del ecosistema.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Accesibilidad</strong></td>
+                        <td>Subtítulos automáticos en el video, transcripción del podcast y texto alternativo (Alt) en la infografía.</td>
+                        <td>Garantiza el acceso a personas con discapacidades auditivas o visuales.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- PASO 6: ESTRATEGIA DE DIFUSIÓN Y EVIDENCIAS -->
+        <section id="difusion">
+            <h2>5. Estrategia Inicial de Difusión y Evidencias</h2>
+            <ul>
+                <li><strong>Objetivo de difusión:</strong> Generar al menos 50 visitas al sitio web central en las primeras 48 horas.</li>
+                <li><strong>Audiencia a la que quieres llegar:</strong> Estudiantes y jóvenes activos en entornos digitales.</li>
+                <li><strong>Mensaje de convocatoria:</strong> <em>"¿Sabes qué dice Google sobre ti? 😱 Descúbrelo y aprende a proteger tu privacidad en menos de 3 minutos. Enlace en la bio 👇"</em></li>
+                <li><strong>Canal de difusión:</strong> Historias y publicaciones en Instagram / TikTok.</li>
+                <li><strong>Momento de publicación:</strong> Martes a las 7:00 PM (horario de mayor tráfico en redes para el segmento joven).</li>
+                <li><strong>Acción de seguimiento:</strong> Medición de reproducciones del video, clics en el enlace principal y comentarios recopilados.</li>
+            </ul>
+
+            <div style="margin-top: 1.5rem;">
+                <h3>Evidencia de Aplicación (Captura de la publicación en redes)</h3>
+                <img class="media-element evidencia" src="publicacionproyecto.png" alt="Evidencia de difusión: captura de la publicación en redes">
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 - Proyecto de Ecosistema de Contenidos Digitales <br> Por: Andrés Felipe Nichoy Calderón</p>
+    </footer>
+
+    <script>
+        var secciones = document.querySelectorAll("section");
+        var enlaces = document.querySelectorAll(".nav ul a");
+
+        window.addEventListener("scroll", function () {
+            var actual = "";
+            for (var i = 0; i < secciones.length; i++) {
+                if (window.scrollY >= secciones[i].offsetTop - 140) {
+                    actual = secciones[i].id;
+                }
+            }
+            for (var j = 0; j < enlaces.length; j++) {
+                enlaces[j].classList.remove("active");
+                if (enlaces[j].getAttribute("href") === "#" + actual) {
+                    enlaces[j].classList.add("active");
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
